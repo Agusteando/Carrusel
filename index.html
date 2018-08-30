@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Parents App</title>
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="css/Knewave-Regular.ttf" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link rel="manifest" href="/manifest.json">
+</head>
+
+<body>
+<div class="container">
+<div class="jumbotron narrow" id="container">
+<img src="css/logo.png" width="50px" height="auto" style="position: fixed; top: 0; left: 0;" >
+
+<div class="wrapper">
+<form id="dummy" action="">
+	<input id="ss" type="text" hidden name="ss">
+
+	<input id="gate1" class="gate" type="submit" name="gate" value="1">
+	<input id="gate2" class="gate" type="submit" name="gate" value="2">
+</form>
+</div>
+<div class="wrapper2">
+
+<form id="form" action="">
+	<input id="ss_output" type="text" hidden name="form_ss">
+	<input id="gate_output" type="text" hidden name="form_gate">
+	<input id="time_output" type="text" hidden name="form_time">
+
+<button class="btn btn-success" id="submit" style="display: none; text-align: center">Confirmar</button>
+</form>
+</br>
+</div>
+</div>
+
+<div class="footer">
+  <p>Desarrollado por Agustín Jurado</p>
+</div>
+</div>
+      <script src="js/jquery.min.js"></script>
+	  <script src="js/bootstrap.min.js"></script>
+      <script src="js/script.js"></script>
+	  <script src="js/form_submit_ajax.js"></script>
+	  <script src="js/sw.js"></script>
+
+</body>
+
+</html>

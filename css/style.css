@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Open+Sans+Condensed:300|Knewave|Amaranth');
+.container {
+	text-align: center;
+     padding: 30px;
+	 font-family: 'Amaranth', sans-serif;
+	 height: 100vh;	
+}
+.jumbotron
+{
+	
+}
+.wrapper3
+{
+
+}
+.gate {
+	width: 49%;
+	float: left;
+	font-size: 50px;
+	height: 100px;
+	font-family: 'Knewave', cursive;
+
+	text-shadow: 2px 2px #4286f4;
+
+}
+.wrapper {
+	width: 100%;
+
+}
+#gate1 {
+	background: url("gate.png");
+	background-repeat: no-repeat;
+	background-position: center; 
+	background-size: contain;
+	border-width: 0px;
+	cursor: pointer;
+	
+
+}
+#gate2 {
+	background: url("gate.png");
+	background-repeat: no-repeat;
+	background-position: center; 
+	background-size: contain;
+	border-width: 0px;
+	cursor: pointer;
+}
+#submit {
+	font-size: 20px;
+	margin-top: 50px;
+}
+
+.boy {
+background-image: url("boy.png");
+background-repeat: no-repeat;
+background-position: center;
+height: 120px;
+overflow: hidden;
+
+}
+.girl {
+background-image: url("girl.png");
+background-repeat: no-repeat;
+background-position: center;
+height: 120px;
+overflow: hidden;
+}
+.ausente {
+background-color: #ff000042;
+content:'[add icon symbol here]';
+}
+
+.ss {
+	max-width: 200px;
+	min-width: 200px;
+	font-size: 18px;
+	margin: 10px;
+	padding-bottom: 105px;
+	font-family: 'Open Sans Condensed', sans-serif;
+	
+}
+
+
+
+h1 {
+	font-family: 'Amaranth', sans-serif;
+	font-size: 20px;
+}
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: gray;
+    text-align: right;
+	padding-right: 20px;
+	font-size: 10px;
+}
+
+
+
+#all {
+font-weight: bold;
+width: 40px;
+font-size: 15px;
+}
+.active {
+	border-width: 10px;
+}
+.Puerta {
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 28px;
+margin: 51px;
+border-radius: 10px;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+	 font-family: 'Josefin Sans', sans-serif
+}
+.Hora {
+	display: none;
+	color: white;
+	background-color: #4286f4;
+	width: 100%;
+	border-radius: 10px;
+}
+
+.ss:hover > .Hora {
+display: block;
+}
+#map {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
