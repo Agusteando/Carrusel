@@ -1,11 +1,7 @@
 	$(document).ready(function () {
 	
 	
-	
-googleRun();
-	
-	
-
+getLocation();
 
 });
 
@@ -20,7 +16,7 @@ function googleRun() {
       dataType: "jsonp"
     });
 
-  }
+}
 
   // print the returned data
   function ctrlq(e) {
@@ -66,6 +62,5 @@ output2.value = gate;
 	
 output3.value = hora;
 
+}
 
-console.log(ss);
-  }

@@ -1,101 +1,117 @@
-"use strict";
+function getLocation() {
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(showPosition);
+	} else {
+		console.log("No furula");
+	}
+}
 
-var Vienna = new google.maps.LatLng( 48.2081743, 16.3738189 ),
-    map = new google.maps.Map( 
-        document.getElementById( 'map' ),
-        {
-            zoom      : 12,
-            center    : Vienna,
-            mapTypeId : google.maps.MapTypeId.ROADMAP,
+function showPosition(position) {
+	here = {
+		lat: position.coords.latitude,
+		lng: position.coords.longitude
+	}
 
-            panControl         : false,
-            zoomControl        : false,
-            scaleControl       : false,
-            streetViewControl  : false,
-            overviewMapControl : false
-        }
-    ),
-    markerCenter = new google.maps.Marker( {
-        map      : map,
-        position : Vienna
-    } ),
-    markerAPosition = new google.maps.LatLng( 48.23, 16.35 ),
-    markerA = new google.maps.Marker( {
-        map      : map,
-        position : markerAPosition
-    } ),
-    markerBPosition = new google.maps.LatLng( 48.21, 16.36 ),
-    markerB = new google.maps.Marker( {
-        map      : map,
-        position : markerBPosition
-    } ),
-    markerCPosition = new google.maps.LatLng( 48.222, 16.35 ),
-    markerC = new google.maps.Marker( {
-        map      : map,
-        position : markerCPosition
-    } ),
-    rectangle = new google.maps.Rectangle({
-        strokeColor   : '#FF0099',
-        strokeOpacity : 0.8,
-        strokeWeight  : 2,
-        fillColor     : '#EE0990',
-        fillOpacity   : 0.35,
-        map           : map,
-        bounds        : new google.maps.LatLngBounds(
-            new google.maps.LatLng( 48.226, 16.347 ),
-            new google.maps.LatLng( 48.19, 16.401 )
-        )
-    } ),
-    rectangleBounds = rectangle.getBounds(),
-    circleRadius = 2000, // Unit: meters
-    circle = new google.maps.Circle( {
-        map           : map,
-        center        : Vienna,
-        radius        : circleRadius,
-        strokeColor   : '#FF0099',
-        strokeOpacity : 1,
-        strokeWeight  : 2,
-        fillColor     : '#009ee0',
-        fillOpacity   : 0.2
-    } ),
-    circleBounds = circle.getBounds(),
-    /**
-     * Tests:
-     * M*CB = Marker n Circle Bounds
-     * M*RB = Marker n Rectange Bounds
-     * M*SB = Marker n Spherical Bounds
-     */
-    // Marker A
-    MACB = circleBounds.contains( markerAPosition ),
-    MARB = rectangleBounds.contains( markerAPosition ),
-    MASB = google.maps.geometry.spherical.computeDistanceBetween( Vienna, markerAPosition ) <= circleRadius,
-    // Marker B
-    MBCB = circleBounds.contains( markerBPosition ),
-    MBRB = rectangleBounds.contains( markerBPosition ),
-    MBSB = google.maps.geometry.spherical.computeDistanceBetween( Vienna, markerBPosition ) <= circleRadius,
-    // Marker C
-    MCCB = circleBounds.contains( markerCPosition ),
-    MCRB = rectangleBounds.contains( markerCPosition ),
-    MCSB = google.maps.geometry.spherical.computeDistanceBetween( Vienna, markerCPosition ) <= circleRadius;
+	var url_string = window.location.href
+	var url = new URL(url_string);
+	var ss = url.searchParams.get('ss');
+	var inst = ss.substring(0, 2);
+var data = {loc: here,plantel: inst}
+	initMap(data);
+}
 
-// Proof, that google Maps API still can't handle "contains" for their paths elements.
-console.table( [
-    {
-        Type : "Circle Bounds", 
-        MarkerA : MACB, 
-        MarkerB : MBCB, 
-        MarkerC : MCCB 
-    },
-    {
-        Type : "Rectangle Bounds", 
-        MarkerA : MARB, 
-        MarkerB : MBRB, 
-        MarkerC : MCRB
-    },
-    {
-        Type : "Spherical Distance",
-        MarkerA : MASB,
-        MarkerB : MBSB,
-        MarkerC : MCSB
-    },
-] );
+function initMap(data) {
+	var here = data.loc;
+	var plantel = data.plantel;
+	console.log(plantel);
+	console.log(here);
+	var current;
+
+	var ptCentrado = {
+		lat: 19.29417297756944,
+		lng: -99.69221022023771
+	};
+	var pmCentrado = {
+		lat: 19.257316470404707,
+		lng: -99.59412338630307
+	};
+	var center;
+
+	var pmCoords = [{
+			lat: 19.25853188884752,
+			lng: -99.59503533736813
+		},
+		{
+			lat: 19.258592659533207,
+			lng: -99.59170939818966
+		},
+		{
+			lat: 19.256637857855555,
+			lng: -99.59161283866513
+		},
+		{
+			lat: 19.25652644358661,
+			lng: -99.59504606620419
+		}
+	];
+	var ptCoords = [{
+			lat: 19.29699400058323,
+			lng: -99.69592967955998
+		},
+		{
+			lat: 19.29676110076818,
+			lng: -99.69410577742985
+		},
+		{
+			lat: 19.29572823672423,
+			lng: -99.69411650626591
+		},
+		{
+			lat: 19.295880128904244,
+			lng: -99.69603696792058
+		}
+	];
+
+	if (plantel === "pm" || plantel === "sm") {
+		center = pmCentrado;
+		current = pmCoords;
+	} else if (plantel === "pt" || plantel === "st") {
+		current = ptCoords;
+		center = ptCentrado;
+	} else {
+		$('#warning').show();
+	}
+
+
+	var map = new google.maps.Map(document.getElementById('map'), {
+		center: center,
+		zoom: 15,
+	});
+
+
+	var geoFence = new google.maps.Polygon({
+		paths: current,
+		strokeColor: "#FF0000",
+		strokeOpacity: 0.6,
+		strokeWeight: 2,
+		fillColor: "#FF0000",
+		fillOpacity: 0.25
+	});
+
+	geoFence.setMap(map);
+
+	var proximity = google.maps.geometry.poly.containsLocation(new google.maps.LatLng(here.lat, here.lng), geoFence);
+	if (proximity === true) {
+		console.log("Te encuentras en proximidad al instituto");
+		googleRun();
+		$('#container').show();
+		$('#map').hide();
+
+	} else {
+		console.log("Acercate más al instituto");
+
+		$('#container').hide();
+	}
+
+
+}
